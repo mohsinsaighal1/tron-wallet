@@ -40,7 +40,7 @@ export function App() {
     const adapters = useMemo(function () {
         const tronLinkAdapter = new TronLinkAdapter();
         const walletConnectAdapter = new WalletConnectAdapter({
-            network: 'Nile',
+            network: 'Mainnet',
             options: {
                 relayUrl: 'wss://relay.walletconnect.com',
                 // example WC app project ID
