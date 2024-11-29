@@ -9,6 +9,8 @@ import {
     WalletModalProvider,
     WalletSelectButton,
 } from '@tronweb3/tronwallet-adapter-react-ui';
+import { TronLinkAdapter } from "@tronweb3/tronwallet-adapter-tronlink";
+
 import toast from 'react-hot-toast';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Alert } from '@mui/material';
 import { WalletConnectAdapter } from '@tronweb3/tronwallet-adapter-walletconnect';
@@ -36,6 +38,8 @@ export function App() {
         } else toast.error(e.message);
     }
     const adapters = useMemo(function () {
+        const tronLinkAdapter = new TronLinkAdapter();
+
         const walletConnectAdapter = new WalletConnectAdapter({
             network: 'Mainnet',
             options: {
@@ -57,7 +61,7 @@ export function App() {
             }
         });
      
-        return [walletConnectAdapter];
+        return [walletConnectAdapter,tronLinkAdapter];
     }, []);
     return (
         <WalletProvider onError={onError} autoConnect={true} disableAutoConnectOnLoad={true} adapters={adapters}>
