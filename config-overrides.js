@@ -1,25 +1,27 @@
-const webpack = require('webpack');
+const webpack = require("webpack");
 
 module.exports = function override(config, env) {
-  console.log('override');
+  console.log("override");
   let loaders = config.resolve;
   loaders.fallback = {
-    'fs': false,
-    'tls': false,
-    'net': false,
-    'querystring': require.resolve('querystring'),
-    'http': require.resolve('stream-http'),
-    'https': require.resolve('https-browserify'),
-    'zlib': require.resolve('browserify-zlib'),
-    'path': require.resolve('path-browserify'),
-    'stream': require.resolve('stream-browserify'),
-    'crypto': require.resolve('crypto-browserify')
+    fs: false,
+    tls: false,
+    net: false,
+    querystring: require.resolve("querystring"),
+    http: require.resolve("stream-http"),
+    https: require.resolve("https-browserify"),
+    buffer: require.resolve("buffer"),
+
+    zlib: require.resolve("browserify-zlib"),
+    path: require.resolve("path-browserify"),
+    stream: require.resolve("stream-browserify"),
+    crypto: require.resolve("crypto-browserify"),
   };
 
   config.plugins.push(
     new webpack.ProvidePlugin({
-      process: 'process/browser',
-      // Buffer: ['buffer', 'Buffer']
+      process: "process/browser",
+      Buffer: ["buffer", "Buffer"],
     })
   );
 
@@ -29,8 +31,8 @@ module.exports = function override(config, env) {
   config.module.rules.unshift({
     test: /\.m?js$/,
     resolve: {
-      fullySpecified: false // disable the behaviour
-    }
+      fullySpecified: false, // disable the behaviour
+    },
   });
 
   // // react-dnd
